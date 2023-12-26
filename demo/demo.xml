@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Demo data for autonsi_install_modules -->
+    <record id="module_demo1" model="autonsi_install_modules">
+        <field name="name">autonsi_standard</field>
+        <field name="github_url">https://github.com/autosim/autonsi_standard</field>
+        <field name="github_branch">main</field>
+    </record>
+
+    <record id="module_demo2" model="autonsi_install_modules">
+        <field name="name">autonsi_wms</field>
+        <field name="github_url">https://github.com/autosim/autonsi_wms</field>
+        <field name="github_branch">main</field>
+    </record>
+
+    <record id="module_demo3" model="autonsi_install_modules">
+        <field name="name">autonsi_rules</field>
+        <field name="github_url">https://github.com/autosim/autonsi_rules</field>
+        <field name="github_branch">main</field>
+    </record>
+
+    <record id="module_demo4" model="autonsi_install_modules">
+        <field name="name">autonsi_mmo</field>
+        <field name="github_url">https://github.com/autosim/autonsi_mmo</field>
+        <field name="github_branch">main</field>
+    </record>
+
+    <record id="module_demo5" model="autonsi_install_modules">
+        <field name="name">autonsi_mms</field>
+        <field name="github_url">https://github.com/autosim/autonsi_mms</field>
+        <field name="github_branch">main</field>
+    </record>
+    
+    <record id="module_demo6" model="autonsi_install_modules">
+        <field name="name">autonsi_process</field>
+        <field name="github_url">https://github.com/autosim/autonsi_process</field>
+        <field name="github_branch">main</field>
+    </record>
+
+    <record id="module_demo7" model="autonsi_install_modules">
+        <field name="name">autonsi_ppn</field>
+        <field name="github_url">https://github.com/autosim/autonsi_ppn</field>
+        <field name="github_branch">main</field>
+    </record>
+
+</odoo>
