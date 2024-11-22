@@ -24,7 +24,6 @@
     'data': [
         'security/ir.model.access.csv',
         'views/views.xml',
-        'data/cron_data.xml',
     ],
     'demo': [
         'demo/demo.xml',

@@ -13,6 +13,7 @@ remote_uninstall_module() {
     ssh -o StrictHostKeyChecking=no -i "$SSH_PRIVATE_KEY_PATH" "$SSH_USERNAME@$SSH_HOST" <<EOF
 
 docker exec $CONTAINER_NAME bash -c "echo \"self.env['ir.module.module'].search([('name', '=', '$MODULE_NAME')]).button_immediate_uninstall()\" | odoo shell -d $DATABASE_NAME --stop-after-init"
+rm -rf $ADDONS_PATH/$CONTAINER_NAME
 
 EOF
 }

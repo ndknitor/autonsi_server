@@ -1,166 +1,6 @@
 <odoo>
     <data>
 
-        <record id="view_partner_form_inherit" model="ir.ui.view">
-            <field name="name">res.partner.form.inherit</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_partner_form"/>
-            <field name="arch" type="xml">
-                <form>
-                    <group name="base">
-                        <field name="service_file" position="after">
-                            <label for="service_file" string="Service file"/>
-                        </field>
-                        <field name="folder_id" password="True" position="after">
-                            <label for="folder_id" string="Folder Id"/>
-                        </field>
-                    </group>
-                </form>
-            </field>
-        </record>
-
-        <record id="view_autonsi_server_form" model="ir.ui.view">
-            <field name="name">autonsi_server.tree</field>
-            <field name="model">autonsi.server</field>
-            <field name="arch" type="xml">
-                <form>
-                    <sheet>
-                        <group>
-                            <group>
-                                <field name="dbhost"/>
-                                <field name="dbname"/>
-                                <field name="dbpassword" password="True" />
-                                <field name="place"/>
-                                <field name="schedule"/>
-                                <field name="last_backup"/>
-                            </group>
-                            <group>
-                                <field name="company"/>
-                                <field name="term"/>
-                                <field name="autorestore"/>
-                                <field name="status"/>
-                            </group>
-                        </group>
-                    </sheet>
-
-                </form>
-            </field>
-        </record>
-        <record id="view_autonsi_server_tree" model="ir.ui.view">
-            <field name="name">autonsi_server.tree</field>
-            <field name="model">autonsi.server</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="dbname"/>
-                    <field name="company"/>
-                    <field name="place"/>
-                    <field name="last_backup"/>
-                    <field name="term"/>
-                    <field name="status"/>
-                </tree>
-            </field>
-        </record>
-        <record id="action_autonsi_server_tree" model="ir.actions.act_window">
-            <field name="name">Database backup</field>
-            <field name="res_model">autonsi.server</field>
-        </record>
-
-        <record id="view_autonsi_server_contract_history" model="ir.ui.view">
-            <field name="name">autonsi_server.tree</field>
-            <field name="model">autonsi.server_contract_history</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="date"/>
-                    <field name="sale_order"/>
-                    <field name="product"/>
-                    <field name="description"/>
-                    <field name="amount"/>
-                    <field name="date"/>
-                    <field name="recevied_amount"/>
-                </tree>
-            </field>
-        </record>
-        <record id="action_autonsi_server_contract_history" model="ir.actions.act_window">
-            <field name="name">Contract History</field>
-            <field name="res_model">autonsi.server_contract_history</field>
-        </record>
-
-        <record id="view_autonsi_server_backup_history" model="ir.ui.view">
-            <field name="name">autonsi_server.tree</field>
-            <field name="model">autonsi.server_backup_history</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="date"/>
-                    <field name="db_name"/>
-                    <field name="device"/>
-                    <field name="file_name"/>
-                    <field name="date"/>
-                    <field name="status"/>
-                </tree>
-            </field>
-        </record>
-        <record id="action_autonsi_server_backup_history" model="ir.actions.act_window">
-            <field name="name">Backup status History</field>
-            <field name="res_model">autonsi.server_backup_history</field>
-        </record>
-
-        <record id="view_autonsi_server_server_history" model="ir.ui.view">
-            <field name="name">autonsi_server.tree</field>
-            <field name="model">autonsi.server_server_history</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="date"/>
-                    <field name="name"/>
-                    <field name="description"/>
-                    <field name="status"/>
-                </tree>
-            </field>
-        </record>
-        <record id="action_autonsi_server_server_history" model="ir.actions.act_window">
-            <field name="name">Server status</field>
-            <field name="res_model">autonsi.server_server_history</field>
-        </record>
-
-        <record id="view_autonsi_server_backup_user" model="ir.ui.view">
-            <field name="name">autonsi_server.tree</field>
-            <field name="model">autonsi.server_user</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="partner_id"/>
-                </tree>
-            </field>
-        </record>
-        <record id="action_autonsi_server_backup_user" model="ir.actions.act_window">
-            <field name="name">User</field>
-            <field name="res_model">autonsi.server_user</field>
-        </record>
-
-        <record id="view_autonsi_server_module_form" model="ir.ui.view">
-            <field name="name">autonsi_install_modules.tree</field>
-            <field name="model">autonsi_install_modules</field>
-            <field name="arch" type="xml">
-                <form>
-                    <header>
-                        <button name="action_install_modules" string="Install" type="object" class="oe_highlight"/>
-                        <button name="action_uninstall_module" string="Uninstall" type="object" class="oe_highlight" confirm="Are you sure you want to uninstall this module?"/>
-                    </header>
-                    <sheet>
-                        <group>
-                            <field name="name"/>
-                            <field name="last_upgrade_date"/>
-                            <field name="user"/>
-                        </group>
-                        <group>
-                            <field name="github_url"/>
-                            <field name="github_branch"/>
-                            <field name="github_dir"/>
-                            <field name="dependent_module" widget="many2many_tags"/>
-                            <field name="servers" widget="many2many_tags"/>
-                        </group>
-                    </sheet>
-                </form>
-            </field>
-        </record>
         <record id="view_autonsi_server_module_tree" model="ir.ui.view">
             <field name="name">autonsi_install_modules.tree</field>
             <field name="model">autonsi_install_modules</field>
@@ -209,21 +49,18 @@
             <field name="model">autonsi.server_server</field>
             <field name="arch" type="xml">
                 <form>
-                    <header>
-                        <button name="action_install_modules" string="Install" type="object" class="oe_highlight"/>
-                    </header>
                     <sheet>
                         <group>
                             <field name="name"/>
                             <field name="company"/>
-                            <field name="start_contract_date"/>
-                            <field name="end_contract_date"/>
-                            <field name="contract_amount"/>
                             <field name="username"/>
                             <field name="private_key"/>
                             <field name="host"/>
                             <field name="addons_path"/>
                             <field name="database"/>
+                            <field name="start_contract_date"/>
+                            <field name="end_contract_date"/>
+                            <field name="contract_amount"/>
                             <field name="token"/>
                         </group>
                     </sheet>
@@ -247,25 +84,15 @@
             <field name="res_model">autonsi.server_server</field>
         </record>
 
-        <menuitem id="menu_autonsi_server" name="Clound Mng" action="action_autonsi_server_tree" web_icon="autonsi_server,static/description/icon.png" />
+        <menuitem id="menu_autonsi_server" name="Clound Mng" web_icon="autonsi_server,static/description/icon.png" />
 
         <menuitem id="menu_autonsi_install" parent="menu_autonsi_server" name="Install"/>
 
-        <menuitem id="menu_autonsi_install_modules" parent="menu_autonsi_install" name="Install apps" action="action_autonsi_install_modules"/>
+        <menuitem id="menu_autonsi_install_modules" name="Install apps" action="action_autonsi_install_modules"/>
 
-        <menuitem id="menu_autonsi_server_server" parent="menu_autonsi_install" name="Install servers" action="action_autonsi_server_server"/>
+        <menuitem id="menu_autonsi_server_server" name="Servers" action="action_autonsi_server_server"/>
 
-        <menuitem id="menu_autonsi_install_modules_settings" parent="menu_autonsi_install" name="Token" action="action_autonsi_install_modules_settings_form"/>
-
-        <menuitem id="menu_autonsi_server_contract_history" name="Contract history" parent="menu_autonsi_server" action="action_autonsi_server_contract_history"/>
-
-        <menuitem id="menu_kn_auto_report" name="Report" parent="menu_autonsi_server" />
-
-        <menuitem id="menu_autonsi_server_history" parent="menu_kn_auto_report" name="Backup history" action="action_autonsi_server_backup_history"/>
-
-        <menuitem id="menu_kn_auto_server_history" parent ="menu_kn_auto_report" name="Server status" action="action_autonsi_server_server_history"/>
-
-        <menuitem id="menu_autonsi_server_user" name="User" parent="menu_autonsi_server" action="action_autonsi_server_backup_user"/>
+        <menuitem id="menu_autonsi_install_modules_settings"  name="Token" action="action_autonsi_install_modules_settings_form"/>
 
     </data>
 </odoo>

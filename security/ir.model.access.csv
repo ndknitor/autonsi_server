@@ -1,10 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-autonsi_server,autonsi_server,model_autonsi_server,base.group_user,1,1,1,1
-autonsi_server_server_history,autonsi_server_server_history,model_autonsi_server_server_history,base.group_user,1,1,1,1
-autonsi_server_backup_history,autonsi_server_backup_history,model_autonsi_server_backup_history,base.group_user,1,1,1,1
-autonsi_server_user,autonsi_server_user,model_autonsi_server_user,base.group_user,1,1,1,1
-autonsi_server_contract_history,autonsi_server_contract_history,model_autonsi_server_contract_history,base.group_user,1,1,1,1
-autonsi_server_server_history,autonsi_server_server_history,model_autonsi_server_server_history,base.group_user,1,1,1,1
 autonsi_server_server,autonsi_server_server,model_autonsi_server_server,base.group_user,1,1,1,1
 autonsi_install_modules,autonsi_install_modules,model_autonsi_install_modules,base.group_user,1,1,1,1
 autonsi_install_modules_settings,autonsi_install_modules_settings,model_autonsi_install_modules_settings,base.group_user,1,1,1,1
