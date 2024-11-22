@@ -13,10 +13,10 @@ class server(models.Model):
 
     name = fields.Char(string="Name", required=True)
     company = fields.Many2one('res.partner', required=True)
-    start_contract_date = fields.Date(string="Start contract date")
+    start_contract_date = fields.Date(string="Start contract date", required=True)
     end_contract_date = fields.Date(string="End contract date", required=True)
     contract_amount = fields.Integer(string="Contract amount", required=True)
-    amount = fields.Integer(string="amount", required=True)
+    # amount = fields.Integer(string="amount", required=True)
 
     username = fields.Char(string="Username", required=True)
     private_key = fields.Binary(string="Private key", required=True)
@@ -52,17 +52,17 @@ class server(models.Model):
         for dependent_module in module.dependent_module:
             self.remote_install_module(dependent_module, server, key_path)
         module_name = 'autonsi_server'
-        bash_name = 'remote_install_module.sh'
+        bash_name = 'install_script.sh'
         bash_path = os.path.join(get_module_path(module_name), bash_name)
         github_dir = module.github_dir
         if (github_dir == False) :
             github_dir = ""
-        command = ["bash", bash_path, server.username, key_path, server.host, server.addons_path, self.token_url(module.github_url), server.database, module.name,module.github_branch, main_module.__str__(),github_dir]
+        command = ["bash", bash_path, server.username, key_path, server.host, server.addons_path, self.token_url(module.github_url), server.database, module.name, server.name, main_module.__str__(),github_dir]
         print(command)
         subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
 
     def remote_restart_server(self, server, key_path):
-        command = ["ssh", '-o', "StrictHostKeyChecking=no" ,"-i", key_path, f'{server.username}@{server.host}', "sudo service odoo-server restart"]
+        command = ["ssh", '-o', "StrictHostKeyChecking=no" ,"-i", key_path, f'{server.username}@{server.host}', f"docker compose restart -f {server.addons_path}/docker-compose.yaml"]
         subprocess.run( command,check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
 
     def token_url(self,github_url):

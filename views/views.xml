@@ -219,7 +219,6 @@
                             <field name="start_contract_date"/>
                             <field name="end_contract_date"/>
                             <field name="contract_amount"/>
-                            <field name="amount"/>
                             <field name="username"/>
                             <field name="private_key"/>
                             <field name="host"/>

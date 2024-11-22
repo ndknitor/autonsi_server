@@ -34,17 +34,13 @@ class install_modules(models.Model):
         try :
             subprocess.run(["git","ls-remote", self.token_url(self.github_url)], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
             for record in self:
-                try:
-                    for server in record.servers :
-                        key_path = os.path.join("/tmp", "privatekey"+server.name)
-                        with open(key_path, 'wb') as f:
-                            f.write(base64.b64decode(server.private_key))
-                        os.chmod(key_path, 0o600)
-                        self.remote_install_module(record, server, key_path, True)
-                        self.remote_restart_server(server, key_path)
-                except e :
-                    print(e)
-                    raise ValidationError(f"Install module {record.name} to server {server.name} failed")
+                for server in record.servers :
+                    key_path = os.path.join("/tmp", "privatekey"+server.name)
+                    with open(key_path, 'wb') as f:
+                        f.write(base64.b64decode(server.private_key))
+                    os.chmod(key_path, 0o600)
+                    self.remote_install_module(record, server, key_path, True)
+                    self.remote_restart_server(server, key_path)
         except subprocess.CalledProcessError as e:
             print(e)
             raise ValidationError(f"Git access to the repository failed")
@@ -67,24 +63,22 @@ class install_modules(models.Model):
         for dependent_module in module.dependent_module:
             self.remote_install_module(dependent_module, server, key_path)
         module_name = 'autonsi_server'
-        bash_name = 'remote_install_module.sh'
+        bash_name = 'install_script.sh'
         bash_path = os.path.join(get_module_path(module_name), bash_name)
-        github_dir = module.github_dir
-        if (github_dir == False) :
-            github_dir = ""
-        command = ["bash", bash_path, server.username, key_path, server.host, server.addons_path, self.token_url(module.github_url), server.database, module.name,module.github_branch, main_module.__str__(),github_dir]
+        command = ["bash", bash_path, server.username, key_path, server.host, server.addons_path, self.token_url(module.github_url), server.database, module.name, server.name , main_module.__str__()]
         print(command)
         subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=True)
 
     def remote_restart_server(self, server, key_path):
-        command = ["ssh", '-o', "StrictHostKeyChecking=no" ,"-i", key_path, f'{server.username}@{server.host}', "sudo service odoo-server restart"]
+        docker_compose_path = server.addons_path.replace("/custom/addons", "") # os.path.join(*server.addons_path.split(os.sep)[:5])
+        command = ["ssh", '-o', "StrictHostKeyChecking=no" ,"-i", key_path, f'{server.username}@{server.host}', f"cd {docker_compose_path}; docker compose restart"]
         subprocess.run( command,check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
 
     def remote_uninstall_module(self, module,server, key_path) :
         module_name = 'autonsi_server'
         bash_name = 'remote_uninstall_module.sh'
         bash_path = os.path.join(get_module_path(module_name), bash_name)
-        command = ["bash", bash_path, server.username, key_path, server.host, server.addons_path,server.database, module.name]
+        command = ["bash", bash_path, server.username, key_path, server.host, server.addons_path,server.database, module.name, server.name]
         print(command)
         subprocess.run(command, stderr=subprocess.PIPE, stdout=subprocess.PIPE,check=True)
 
