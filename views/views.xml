@@ -111,9 +111,8 @@
             <field name="res_model">autonsi.server_server</field>
         </record>
         <menuitem id="menu_autonsi_server" name="Clound Mng" action="action_autonsi_install_modules"  />
-        <menuitem id="menu_autonsi_install" parent="menu_autonsi_server" name="Install"/>
-        <menuitem id="menu_autonsi_install_modules" parent="menu_autonsi_install" name="Install apps" action="action_autonsi_install_modules"/>
-        <menuitem id="menu_autonsi_server_server" parent="menu_autonsi_install" name="Install servers" action="action_autonsi_server_server"/>
-        <menuitem id="menu_autonsi_install_modules_settings" parent="menu_autonsi_install" name="Token" action="action_autonsi_install_modules_settings_form"/>
+        <menuitem id="menu_autonsi_install_modules" parent="menu_autonsi_server" name="Modules" action="action_autonsi_install_modules"/>
+        <menuitem id="menu_autonsi_server_server" parent="menu_autonsi_server" name="Servers" action="action_autonsi_server_server"/>
+        <menuitem id="menu_autonsi_install_modules_settings" parent="menu_autonsi_server" name="Token" action="action_autonsi_install_modules_settings_form"/>
     </data>
 </odoo>

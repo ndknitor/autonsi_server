@@ -15,13 +15,15 @@ remote_install_module() {
 
 
 if [ "$MAIN_MODULE" == "True" ]; then
+    rm -rf "$ADDONS_PATH"/"$MODULE_NAME"
     git clone "$GITHUB_URL" "$ADDONS_PATH"/"$MODULE_NAME"
     docker exec "$CONTAINER_NAME" odoo -i "$MODULE_NAME" -d "$DATABASE_NAME" --stop-after-init
 else
   if [ -d "$ADDONS_PATH"/"$MODULE_NAME" ]; then
     echo "Skiping reinstall module"
   else
-    git clone "$GITHUB_URL" "$ADDONS_PATH"/"$MODULE_NAME"
+    rm -rf "$ADDONS_PATH"/"$MODULE_NAME"
+    git clone "$GITHUB_URL" "$ADDONS_PATH"/"$MODULE_NAME" 
     docker exec "$CONTAINER_NAME" odoo -i "$MODULE_NAME" -d "$DATABASE_NAME" --stop-after-init
   fi
 fi
