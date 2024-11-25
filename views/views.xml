@@ -1,6 +1,32 @@
 <odoo>
     <data>
-
+        
+        <record id="view_autonsi_server_module_form" model="ir.ui.view">
+            <field name="name">autonsi_install_modules.tree</field>
+            <field name="model">autonsi_install_modules</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_install_modules" string="Install" type="object" class="oe_highlight"/>
+                        <button name="action_uninstall_module" string="Uninstall" type="object" class="oe_highlight" confirm="Are you sure you want to uninstall this module?"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="last_upgrade_date"/>
+                            <field name="user"/>
+                        </group>
+                        <group>
+                            <field name="github_url"/>
+                            <field name="github_branch"/>
+                            <field name="github_dir"/>
+                            <field name="dependent_module" widget="many2many_tags"/>
+                            <field name="servers" widget="many2many_tags"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
         <record id="view_autonsi_server_module_tree" model="ir.ui.view">
             <field name="name">autonsi_install_modules.tree</field>
             <field name="model">autonsi_install_modules</field>
@@ -18,7 +44,6 @@
             <field name="name">Apps</field>
             <field name="res_model">autonsi_install_modules</field>
         </record>
-
         <record id="view_autonsi_install_modules_settings_form" model="ir.ui.view">
             <field name="name">Settings Form</field>
             <field name="model">autonsi_install_modules.settings</field>
@@ -43,24 +68,26 @@
             <field name="view_id" ref="view_autonsi_install_modules_settings_form"/>
             <field name="target">new</field>
         </record>
-
         <record id="view_autonsi_server_server_form" model="ir.ui.view">
             <field name="name">autonsi_server.server.tree</field>
             <field name="model">autonsi.server_server</field>
             <field name="arch" type="xml">
                 <form>
+                    <header>
+                        <button name="action_install_modules" string="Install" type="object" class="oe_highlight"/>
+                    </header>
                     <sheet>
                         <group>
                             <field name="name"/>
                             <field name="company"/>
+                            <field name="start_contract_date"/>
+                            <field name="end_contract_date"/>
+                            <field name="contract_amount"/>
                             <field name="username"/>
                             <field name="private_key"/>
                             <field name="host"/>
                             <field name="addons_path"/>
                             <field name="database"/>
-                            <field name="start_contract_date"/>
-                            <field name="end_contract_date"/>
-                            <field name="contract_amount"/>
                             <field name="token"/>
                         </group>
                     </sheet>
@@ -83,16 +110,10 @@
             <field name="name">Install server</field>
             <field name="res_model">autonsi.server_server</field>
         </record>
-
-        <menuitem id="menu_autonsi_server" name="Clound Mng" web_icon="autonsi_server,static/description/icon.png" />
-
+        <menuitem id="menu_autonsi_server" name="Clound Mng" action="action_autonsi_install_modules"  />
         <menuitem id="menu_autonsi_install" parent="menu_autonsi_server" name="Install"/>
-
-        <menuitem id="menu_autonsi_install_modules" name="Install apps" action="action_autonsi_install_modules"/>
-
-        <menuitem id="menu_autonsi_server_server" name="Servers" action="action_autonsi_server_server"/>
-
-        <menuitem id="menu_autonsi_install_modules_settings"  name="Token" action="action_autonsi_install_modules_settings_form"/>
-
+        <menuitem id="menu_autonsi_install_modules" parent="menu_autonsi_install" name="Install apps" action="action_autonsi_install_modules"/>
+        <menuitem id="menu_autonsi_server_server" parent="menu_autonsi_install" name="Install servers" action="action_autonsi_server_server"/>
+        <menuitem id="menu_autonsi_install_modules_settings" parent="menu_autonsi_install" name="Token" action="action_autonsi_install_modules_settings_form"/>
     </data>
 </odoo>
